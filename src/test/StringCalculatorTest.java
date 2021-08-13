@@ -1,3 +1,7 @@
+package test;
+
+import main.NegativeNumberException;
+import main.StringCalculator;
 import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
