@@ -3,7 +3,7 @@ public class StringCalculator {
         if(numbers.isEmpty()){
             return 0;
         }
-        String []numTokens = numbers.split(","); //splitting token , as delimiter
+        String []numTokens = numbers.split(",|\n"); //splitting token , as delimiter
         if(numTokens.length == 1){
             return Integer.parseInt(numbers);
         }else{
