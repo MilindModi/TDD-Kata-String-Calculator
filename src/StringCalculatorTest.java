@@ -33,7 +33,7 @@ public class StringCalculatorTest {
         assertEquals(StringCalculator.add("//?\n2?2?2"),6,"string with delimiter(?) should act as separator");
     }
 
-    @Test
+
     public void addNegativeNumberTest(){
 
         //negative numbers will throw an exception
@@ -62,5 +62,17 @@ public class StringCalculatorTest {
         assertEquals(StringCalculator.add("1,1001,3"),4,"Number bigger than 1000 should be ignored");
 
         assertEquals(StringCalculator.add("//;\n1;2;1003"),3,"Number bigger than 1000 should be ignored");
+    }
+
+    public void addMultiCharacterDelimiterTest() {
+        // Multi character delimiter
+        assertEquals(StringCalculator.add("//[***]\n1***2***3"),6,"single Multi character delimiter");
+
+        //multiple multi character delimiter
+        assertEquals(StringCalculator.add("//[*][%]\n1*2%3"),6,"Multiple multi character delimiters");
+
+        //multiple character delimiter
+        assertEquals(StringCalculator.add("//[*][%][$$$]\n1*2%3$$$5"),11,"Multiple multi character delimiters");
+
     }
 }

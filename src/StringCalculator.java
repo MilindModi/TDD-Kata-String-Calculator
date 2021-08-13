@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
     public static int add(String numbers){
@@ -33,12 +35,22 @@ public class StringCalculator {
     }
 
     public static String getSeparator(String number){
-        String separator = "[\n";
+        String separator = "\n";
+        String extraSeparator = "|,";
         if(number.startsWith("//")){
-            separator += number.substring(2,number.indexOf("\n")) +"]";
-        }else{
-            separator += ",]";
+
+            String tmpDelimiter = number.substring(2,number.indexOf("\n"));
+
+            if(tmpDelimiter.startsWith("[") && tmpDelimiter.endsWith("]")){ // for the case of custom delimiter
+
+                Pattern pattern = Pattern.compile("\\[(.*?)\\]");
+                Matcher match = pattern.matcher(tmpDelimiter);
+                while(match.find())
+                    extraSeparator +=  "|\\Q" + match.group(1)  + "\\E";
+            }else{
+                extraSeparator += "|\\Q" + tmpDelimiter +"\\E";
+            }
         }
-        return separator;
+        return  separator + extraSeparator;
     }
 }
