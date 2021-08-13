@@ -1,5 +1,6 @@
 import org.testng.annotations.Test;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+
 @Test
 public class StringCalculatorTest {
 
@@ -33,7 +34,6 @@ public class StringCalculatorTest {
         assertEquals(StringCalculator.add("//?\n2?2?2"),6,"string with delimiter(?) should act as separator");
     }
 
-
     public void addNegativeNumberTest(){
 
         //negative numbers will throw an exception
@@ -57,6 +57,7 @@ public class StringCalculatorTest {
             assertEquals(ne.getMessage(),"Negative Numbers are not allowed: [-33]","Negative numbers are not allowed");
         }
     }
+
     public void addBiggerNumberTest() {
         //bigger than 1000
         assertEquals(StringCalculator.add("1,1001,3"),4,"Number bigger than 1000 should be ignored");
