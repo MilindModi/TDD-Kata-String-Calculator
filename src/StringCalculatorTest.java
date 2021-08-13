@@ -32,4 +32,29 @@ public class StringCalculatorTest {
         //first line as delimiter definition
         assertEquals(StringCalculator.add("//?\n2?2?2"),6,"string with delimiter(?) should act as separator");
     }
+
+    @Test
+    public void addNegativeNumberTest(){
+
+        //negative numbers will throw an exception
+        try{
+            StringCalculator.add("-01,-2,-33");
+        }catch(NegativeNumberException ne){
+            assertEquals(ne.getMessage(),"Negative Numbers are not allowed: [-01, -2, -33]","Negative numbers are not allowed");
+        }
+
+        //negative numbers will throw an exception
+        try{
+            StringCalculator.add("1,2,-33");
+        }catch(NegativeNumberException ne){
+            assertEquals(ne.getMessage(),"Negative Numbers are not allowed: [-33]","Negative numbers are not allowed");
+        }
+
+        //negative numbers will throw an exception
+        try{
+            StringCalculator.add("//;\n1;2;-33");
+        }catch(NegativeNumberException ne){
+            assertEquals(ne.getMessage(),"Negative Numbers are not allowed: [-33]","Negative numbers are not allowed");
+        }
+    }
 }
