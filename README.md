@@ -22,11 +22,11 @@ Hints:
 
 4.Support different delimiters
 
-* to change a delimiter, the beginning of the string will contain a separate line that looks
+* To change a delimiter, the beginning of the string will contain a separate line that looks
   like this: `“//[delimiter]\n[numbers…]”` for example `“//;\n1;2”`
   should return three where the default delimiter is `‘;’` .
 
-2.the first line is optional. all existing scenarios should still be supported
+* The first line is optional. all existing scenarios should still be supported
 
 5.Calling Add with a negative number will throw an exception **“negatives not allowed”** - and the negative that was passed.
 
@@ -47,4 +47,5 @@ Hints:
     ├── test                    # contains testcases
 
 **Test**
+
 Test directory contains various testcases which to be performed on implemented methods.
