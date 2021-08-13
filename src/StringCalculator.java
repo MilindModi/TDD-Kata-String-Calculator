@@ -3,6 +3,15 @@ public class StringCalculator {
         if(numbers.isEmpty()){
             return 0;
         }
-        return Integer.parseInt(numbers);
+        String []numTokens = numbers.split(","); //splitting token , as delimiter
+        if(numTokens.length == 1){
+            return Integer.parseInt(numbers);
+        }else{
+            int sum = 0;
+            for(String num : numTokens){
+                sum += Integer.parseInt(num);
+            }
+            return sum;
+        }
     }
 }
