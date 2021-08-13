@@ -1,10 +1,12 @@
+import java.util.ArrayList;
+
 public class StringCalculator {
     public static int add(String numbers){
         if(numbers.isEmpty()){
             return 0;
         }
         String separator = getSeparator(numbers);
-
+        ArrayList<String> negativeNumbers = new ArrayList<String>();
         if(numbers.startsWith("//")){
             numbers = numbers.substring(numbers.indexOf("\n") + 1);
         }
@@ -16,9 +18,17 @@ public class StringCalculator {
         }else{
             int sum = 0;
             for(String num : numTokens){
-                sum += Integer.parseInt(num);
+                int n =  Integer.parseInt(num);
+                if(n < 0){
+                    negativeNumbers.add(num);
+                }else{
+                    sum += n;
+                }
             }
-            return sum;
+            if(negativeNumbers.isEmpty()){
+                return sum;
+            }
+                throw new NegativeNumberException("Negative Numbers are not allowed: "+negativeNumbers);
         }
     }
 
