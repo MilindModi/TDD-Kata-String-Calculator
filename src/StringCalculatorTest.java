@@ -25,5 +25,11 @@ public class StringCalculatorTest {
 
         //new line as delimiter
         assertEquals(StringCalculator.add("1\n2,3,4"),10,"digit string with /\n");
+
+        //first line as delimiter definition
+        assertEquals(StringCalculator.add("//;\n1;2"),3,"string with delimiter(;) should act as separator");
+
+        //first line as delimiter definition
+        assertEquals(StringCalculator.add("//?\n2?2?2"),6,"string with delimiter(?) should act as separator");
     }
 }
