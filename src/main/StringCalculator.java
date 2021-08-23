@@ -8,6 +8,9 @@ import java.util.regex.Pattern;
  *
  * @author : Milind Modi
  */
+enum Operator{
+    Add,Mul
+}
 public class StringCalculator {
 
     /**
@@ -15,7 +18,9 @@ public class StringCalculator {
      * @return addition of string numbers
      */
     public static int add(String numbers){
-        boolean multiply = false;
+
+        Operator operator = Operator.Add;
+        int ans = 0;
         if(numbers.isEmpty()){
             return 0;
         }
@@ -27,9 +32,14 @@ public class StringCalculator {
 
         // if first line is custom delimiter
         if(numbers.startsWith("//") || numbers.startsWith("*//") ){
-            if(numbers.startsWith("*")){
-                multiply = true;
-            }
+           switch(numbers.charAt(0)){
+               case '*':
+                    operator = Operator.Mul;
+                    ans = 1;
+                    break;
+               default:
+                   operator = Operator.Add;
+           }
             numbers = numbers.substring(numbers.indexOf("\n") + 1);
         }
 
@@ -38,20 +48,24 @@ public class StringCalculator {
         if(numTokens.length == 1){
             return Integer.parseInt(numbers);
         } else {
-            int sum = multiply ? 1 : 0;
+
             for(String num : numTokens){
                 int n =  Integer.parseInt(num);
                 if(n < 0){
                     negativeNumbers.add(num);
                 } else if(n <= 1000){  // ignore bigger than 1000
-                    if(!multiply)
-                        sum += n;
-                    else
-                        sum *= n;
+                    switch (operator){
+                        case Add :
+                            ans += n;
+                            break;
+                        case  Mul:
+                            ans *= n;
+                            break;
+                    }
                 }
             }
             if(negativeNumbers.isEmpty())  // if no negative numbers found
-                return sum;
+                return ans;
 
             throw new NegativeNumberException("Negative Numbers are not allowed: "+negativeNumbers);
         }
