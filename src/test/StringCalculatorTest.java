@@ -80,4 +80,16 @@ public class StringCalculatorTest {
         assertEquals(StringCalculator.add("//[*][%][$$$]\n1*2%3$$$5"),11,"Multiple multi character delimiters");
 
     }
+
+    public void addMultiplyTest(){
+
+        //normal delimiter multiplication
+        assertEquals(StringCalculator.add("*//,\n1,1001,3"),3,"Number bigger than 1000 should be ignored");
+
+        //with ;
+        assertEquals(StringCalculator.add("*//;\n2;3;4"),24,"Multiply testcase ");
+
+        //multiply with custom delimiter
+        assertEquals(StringCalculator.add("*//[*][%]\n1*2%3"),6,"Multiple multi character delimiters");
+    }
 }

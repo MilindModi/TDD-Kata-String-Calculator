@@ -15,16 +15,21 @@ public class StringCalculator {
      * @return addition of string numbers
      */
     public static int add(String numbers){
+        boolean multiply = false;
         if(numbers.isEmpty()){
             return 0;
         }
+
 
         // get delimiter for string
         String separator = getSeparator(numbers);
         ArrayList<String> negativeNumbers = new ArrayList<String>();
 
         // if first line is custom delimiter
-        if(numbers.startsWith("//")){
+        if(numbers.startsWith("//") || numbers.startsWith("*//") ){
+            if(numbers.startsWith("*")){
+                multiply = true;
+            }
             numbers = numbers.substring(numbers.indexOf("\n") + 1);
         }
 
@@ -33,13 +38,16 @@ public class StringCalculator {
         if(numTokens.length == 1){
             return Integer.parseInt(numbers);
         } else {
-            int sum = 0;
+            int sum = multiply ? 1 : 0;
             for(String num : numTokens){
                 int n =  Integer.parseInt(num);
                 if(n < 0){
                     negativeNumbers.add(num);
                 } else if(n <= 1000){  // ignore bigger than 1000
-                    sum += n;
+                    if(!multiply)
+                        sum += n;
+                    else
+                        sum *= n;
                 }
             }
             if(negativeNumbers.isEmpty())  // if no negative numbers found
@@ -52,6 +60,9 @@ public class StringCalculator {
     public static String getSeparator(String number){
         String separator = "\n";
         String extraSeparator = "|,";
+        if(number.startsWith("*")){
+            number = number.substring(1);
+        }
         if(number.startsWith("//")){
 
             // peek custom delimiter till \n
